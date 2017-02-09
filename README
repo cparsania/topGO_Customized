@@ -1,0 +1,7 @@
+## Run command 
+
+Rscript topGO_customised.R <species code> <geneset file>
+
+## For species code look at the help page 
+
+Rscript topGO_customised.R --help
