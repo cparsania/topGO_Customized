@@ -10,21 +10,23 @@ if(!isTopGoPresent){
         library("topGO")
 }
 #source("~/Documents/scripts/R_Script/topGo/topGOfunctions.R")
-source("./topGOfunctions.R")
+source("./R/topGOfunctions.R")
 dbFilePath="./gene_association_files"
+
 #################
 # Run commmands #
 #################
 ## getCommnadLineArguments
 args <- commandArgs(TRUE)
 validateCommnadLineArgs(args = args)
-## Ask user to select species : candida , aspergillus , Saccharomyces cerevisiae 
+
+## get argument 1 which is species index given by user
 userGivenSpeciesIndex <- as.integer(args[1])
 
 #### prepare geneID2GO object required for topGO object 
 geneID2GO <- getGeneToGoMapping(userGivenSpeciesIndex = userGivenSpeciesIndex)
 
-## get user inputs : organism and genes of interest. 
+## SUer arg 2 (geneset file path) to create list of genes given by user  
 myInterestingGenes <- getUserGeneSet(args[2]) ## get genes from user 
 
 ## call processDataFunction for given genesets

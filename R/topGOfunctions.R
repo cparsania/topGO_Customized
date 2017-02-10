@@ -4,8 +4,9 @@
 
 getGeneToGoMapping <- function(userGivenSpeciesIndex){
         
-        ## default para 
+        ## get file path
         file = getBgDBFile(speciesIndex = userGivenSpeciesIndex)
+        
         ## read file 
         go_association_file <- readLines(file)
         
@@ -14,11 +15,11 @@ getGeneToGoMapping <- function(userGivenSpeciesIndex){
         headerLine <- go_association_file[isHeaderLine]
         dataLines <- go_association_file[!isHeaderLine]
         
-        ## show org name with taxon id. 
+        ## extract taxon ID from organism specific line. 
         isOrganismInfo <- grepl("Organism ",headerLine,fixed = T)
         organismInfoLines <- headerLine[isOrganismInfo]
         
-        ##get taxon id from user 
+        ##reassign species index 
         userChoice <- userGivenSpeciesIndex
         
         ## seprate data as per taxon id 
@@ -84,7 +85,7 @@ validateCommnadLineArgs <- function(args){
                 stop()
         }
         
-        ## check individualArgs
+        ## check individual args
         speciesCode <- as.integer(args[1])
         isGenesetFileExist <- file.exists(args[2])
         if(is.na(speciesCode)){
@@ -96,7 +97,7 @@ validateCommnadLineArgs <- function(args){
                 helpMessage()
                 stop()
         }else if(!isGenesetFileExist){
-                cat("Given file doesn't exist. Give full path")
+                cat("File doesn't exist. Give full path")
                 helpMessage()
                 stop()
         }else{
